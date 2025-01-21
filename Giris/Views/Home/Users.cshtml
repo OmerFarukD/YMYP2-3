@@ -1,0 +1,82 @@
+﻿@model List<User>
+
+
+    @{
+        int minAge = 17;
+        int notFiltered = 0;
+    }
+    <div class="m-3 ">
+        <h2>Bütün Kullanıcılar</h2>
+    <table class="table table-warning table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Ad</th>
+                <th scope="col">Soyad</th>
+                <th scope="col">Email</th>
+                <th scope="col">Yaş</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Name</th>
+                    <td>@item.Surname</td>
+                    <td>@item.Email</td>
+                    <td>@item.Age</td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+    </div>
+
+    <div class="mb-2">
+        <h2>Yaşı @minAge den büyük olan kullanıcılar Listesi</h2>
+    <table class="table table-warning table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Ad</th>
+                <th scope="col">Soyad</th>
+                <th scope="col">Email</th>
+                <th scope="col">Yaş</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (item.Age>minAge)
+                {
+                    <tr>
+                        <th scope="row">@item.Name</th>
+                        <td>@item.Surname</td>
+                        <td>@item.Email</td>
+                        <td>@item.Age</td>
+                    </tr>
+                }
+                else
+                {
+                    notFiltered++;
+                }
+
+            }
+        </tbody>
+    </table>
+
+
+    @if (notFiltered > 0)
+    {
+        <div class="alert alert-danger" role="alert">
+            Filtreye uymayan @notFiltered Kişi var
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            Filtreye uymayan kullanıcı bulunamamıştır.
+        </div>
+    }
+</div>
+

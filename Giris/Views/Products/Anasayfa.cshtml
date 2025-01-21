@@ -1,0 +1,33 @@
+﻿@model List<Product>
+
+<h1 class="text-warning bg-danger fs-1 fst-italic">Ürünler Sayfasına hoşgeldiniz!!!!</h1>
+
+
+<a  class="btn btn-outline-success">Ürün Ekle</a>
+
+<table class="table table-warning table-hover table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Ad</th>
+            <th scope="col">Fiyat $</th>
+            <th scope="col">Stok</th>
+            <th scope="col">Kategori</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Name</th>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+                <td>@item.CategoryName</td>
+                <td><a style="text-decoration:none;" href="">Detaya Git</a></td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
