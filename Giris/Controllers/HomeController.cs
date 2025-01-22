@@ -4,6 +4,10 @@ using System.Diagnostics;
 
 namespace Giris.Controllers;
 
+
+// HttpGet : Bir veri kaynaðýndan veri göstermek için kullanýlýr.(Veri tabaný tablosu, Bir sayfa)
+// HttpPost : Bir veri kaynaðýnda veri manipülasyonu yapmak için kullanýlýr. (veri tabaný üzerinde güncelleme, ekleme);
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -47,7 +51,7 @@ public class HomeController : Controller
         return View(user);
     }
 
-
+    [HttpGet]
     public IActionResult Users()
     {
         var users = new List<User>()

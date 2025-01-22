@@ -1,0 +1,25 @@
+﻿@* .net maui *@
+@model Product
+
+<form asp-controller="Products" asp-action="Add" method="post">
+    <div class="mb-3">
+        <label asp-for="Name"  class="form-label">Ad</label>
+        <input asp-for="Name" type="text" class="form-control" >
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Ürünün Değeri</label>
+        <input asp-for="Price" type="number" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Stock" class="form-label">Stok Adedi</label>
+        <input asp-for="Stock" type="text" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryName" class="form-label">Kategori Adı</label>
+        <input asp-for="CategoryName" type="text" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-outline-success">Kaydet</button>
+</form>

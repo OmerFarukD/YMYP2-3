@@ -1,0 +1,20 @@
+﻿@model Product
+
+
+@if (Model.Price < 5000)
+{
+    <td><span class="badge rounded-pill bg-primary">@Model.Price</span></td>
+}
+else if (Model.Price >= 5000 && Model.Price < 15000)
+{
+    <td><span class="badge rounded-pill bg-success">@Model.Price</span></td>
+}
+
+else if (Model.Price >= 15000 && Model.Price <= 20000)
+{
+    <td><span class="badge rounded-pill bg-warning">@Model.Price</span></td>
+}
+else
+{
+    <td><span class="badge rounded-pill bg-danger">@Model.Price</span></td>
+}

@@ -1,0 +1,15 @@
+﻿@model Product
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text"><strong>Ürünün Fiyatı: </strong> @Model.Price TL </p>
+        <p class="card-text"><strong>Ürünün Stok Adedi: </strong> @Model.Stock </p>
+        <p class="card-text"><strong>Ürünün Kategori Adı: </strong> @Model.CategoryName TL </p>
+
+        <div class="d-flex gap-3">
+            <a asp-controller="Products" asp-action="Update" asp-route-id="@Model.Id"  class="btn btn-outline-warning">Güncelle</a>
+            <a  asp-action="Delete" asp-controller="Products" asp-route-id="@Model.Id" class="btn btn-outline-danger">Sil</a>
+            <a asp-action="Anasayfa" asp-controller="Products" class="btn btn-outline-primary">Anasayfaya Git</a>
+        </div>
+    </div>
+</div>

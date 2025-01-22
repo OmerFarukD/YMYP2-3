@@ -1,8 +1,10 @@
 ﻿@model List<Product>
 
 <h1 class="text-warning bg-danger fs-1 fst-italic">Ürünler Sayfasına hoşgeldiniz!!!!</h1>
+
+
 <a asp-controller="Products" asp-action="Add" class="btn btn-outline-success mb-3">Ürün Ekle</a>
-<table class="table table-info table-hover table-striped">
+<table class="table table-warning table-hover table-striped">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -19,12 +21,15 @@
             <tr>
                 <th scope="row">@item.Id</th>
                 <td>@item.Name</td>
-              <partial name="Partials/_ProductPriceBadgePartial" model="item" />
+                <td>@item.Price</td>
                 <td>@item.Stock</td>
                 <td>@item.CategoryName</td>
                 <td><a style="text-decoration:none;" asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">Detaya Git</a></td>
-@*                 <td><a style="text-decoration:none;" asp-controller="Products" asp-action="ProductNameContains" asp-route-productName="@item.Name">Benzeyen Ürünler</a></td> *@
+                <td><a style="text-decoration:none;" asp-controller="Products" asp-action="ProductNameContains" asp-route-productName="@item.Name"></a></td>
             </tr>
         }
+
+
+
     </tbody>
 </table>
