@@ -1,0 +1,18 @@
+﻿ @model Product
+
+@if (Model.Stock<25)
+{
+    <td><span class="badge bg-danger">@Model.Stock</span></td>
+}
+else if (Model.Stock >= 25 && Model.Stock<60)
+{
+    <td><span class="badge bg-warning">@Model.Stock</span></td>
+}
+else if (Model.Stock >= 60 && Model.Stock < 200)
+{
+    <td><span class="badge bg-primary">@Model.Stock</span></td>
+}
+else
+{
+    <td><span class="badge bg-success">@Model.Stock</span></td>
+}
