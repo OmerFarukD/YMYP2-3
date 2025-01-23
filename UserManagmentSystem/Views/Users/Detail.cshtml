@@ -1,0 +1,19 @@
+﻿@model UserResponseDto
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"><strong>Username:</strong>@Model.Username</h5>
+        <h6 class="card-subtitle mb-2 text-muted"><strong>Email:</strong>@Model.Email</h6>
+        <p class="card-text"><strong>Ad: </strong>@Model.FirstName</p>
+        <p class="card-text"><strong>Soyad: </strong>@Model.LastName</p>
+        <p class="card-text"><strong>Şehir: </strong>@Model.City</p>
+        
+        <div class="row m-1">
+            <a asp-action="Index" asp-controller="Users" class="btn btn-outline-info mb-1">Anasayfaya git</a>
+            <a asp-controller="Users" asp-action="Update" asp-route-id="@Model.Id"  class="btn btn-outline-warning mb-1">Güncelle</a>
+            <a asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id"  class="btn btn-outline-danger mb-1">Sil</a>
+        </div>
+        
+
+    </div>
+</div>

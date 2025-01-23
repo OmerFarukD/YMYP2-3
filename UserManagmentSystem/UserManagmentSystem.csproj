@@ -16,7 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Users\" />
+    <UpToDateCheckInput Remove="Views\Users\Add.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Users\Add.cshtml" />
   </ItemGroup>
 
 </Project>
