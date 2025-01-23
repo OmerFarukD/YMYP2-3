@@ -2,8 +2,6 @@
 
 public sealed class UserRole : Entity<long>
 {
-
-
     public UserRole()
     {
         Role = new Role();

@@ -1,0 +1,14 @@
+﻿@model Role
+
+<form asp-action="Update" asp-controller="Roles" method="post">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">Id</label>
+        <input asp-for="Id" type="number" class="form-control" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Rol Adı</label>
+        <input asp-for="Name" type="text" class="form-control" >
+    </div>
+    <button type="submit" class="btn btn-outline-success">Ekle</button>
+</form>

@@ -1,0 +1,9 @@
+﻿@model Role
+
+<form asp-action="Add" asp-controller="Roles">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Rol Adı</label>
+        <input asp-for="Name" type="text" class="form-control" >
+    </div>
+    <button type="submit" class="btn btn-outline-success">Ekle</button>
+</form>

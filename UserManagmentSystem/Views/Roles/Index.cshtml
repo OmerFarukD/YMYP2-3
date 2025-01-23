@@ -1,0 +1,50 @@
+﻿
+@model List<RoleResponseDto>
+
+    <a asp-controller="Roles" asp-action="Add" class="btn btn-outline-success mb-2">Ekle</a>
+
+<table class="table table-success table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Created</th>
+            <th scope="col">UpdatedDate</th>
+            <th scope="col">Güncelleme</th>
+            <th scope="col">Silme</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Name</td>
+                <td>@item.CreatedDate</td>
+                @if (!item.UpdatedDate.HasValue)
+                {
+                    <td>Henüz Güncellenemedi</td>
+                }
+                else
+                {
+                    <td>@item.UpdatedDate</td>
+                }
+                <td><a 
+                    class="btn btn-sm bg-warning"
+                    asp-route-id="@item.Id"
+                    asp-action="Update"
+                    asp-controller="Roles">Güncelle</a></td>
+
+                    <td>
+                    <a 
+                       class="btn btn-sm bg-danger text-white"
+                       asp-route-id="@item.Id"
+                       asp-action="Delete"
+                       asp-controller="Roles">Sil</a>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>
