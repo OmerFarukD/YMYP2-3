@@ -1,8 +1,10 @@
+using System.Reflection;
 using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Repository.Repositories.Abstracts;
 using UserManagmentSystem.Repository.Repositories.Concretes;
 using UserManagmentSystem.Service.Abstracts;
 using UserManagmentSystem.Service.Concretes;
+using UserManagmentSystem.Service.Mappers.Profiles;
 using UserManagmentSystem.Service.Mappers.Roles;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +25,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BaseDbContext>();
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
-builder.Services.AddScoped<IRoleMapper,RoleManuelConverter>();
+builder.Services.AddScoped<IRoleMapper,RoleAutoMapperConverter>();
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 
 var app = builder.Build();

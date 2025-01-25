@@ -47,53 +47,45 @@ public class RolesController : Controller
     }
 
 
-    //[HttpGet]
-    //public IActionResult Update(int id)
-    //{
+    [HttpGet]
+    public IActionResult Update(int id)
+    {
 
 
-    //    var role = _context.Roles.Find(id);
+        var role = _roleService.GetById(id);
 
 
-    //    return View(role);
-    //}
+        return View(role);
+    }
 
-    //[HttpPost]
-    //public IActionResult Update(Role role)
-    //{
-    //    role.UpdatedDate = DateTime.UtcNow;
-    //    _context.Roles.Update(role);
-    //    _context.SaveChanges();
+    [HttpPost]
+    public IActionResult Update(RoleUpdateRequestDto role)
+    {
 
-    //    return RedirectToAction("Index","Roles");
-    //}
+        _roleService.Update(role);
+        return RedirectToAction("Index", "Roles");
+    }
 
 
-    //[HttpPost]
-    //public IActionResult Add(Role role)
-    //{
+    [HttpPost]
+    public IActionResult Add(RoleAddRequestDto role)
+    {
 
-    //    role.CreatedDate = DateTime.UtcNow;
-    //    _context.Roles.Add(role);
-    //    _context.SaveChanges();
+        _roleService.Add(role);
+        return RedirectToAction("Index", "Roles");
+    }
 
-    //    return RedirectToAction("Index","Roles");
-    //}
-
-    //[HttpGet]
-    //public IActionResult Add()
-    //{
-    //    return View();
-    //}
+    [HttpGet]
+    public IActionResult Add()
+    {
+        return View();
+    }
 
 
-    //[HttpGet]
-    //public IActionResult Delete(int id)
-    //{
-    //    var role = _context.Roles.Find(id);
-    //    _context.Roles.Remove(role);
-    //    _context.SaveChanges();
-
-    //    return RedirectToAction("Index","Roles");
-    //}
+    [HttpGet]
+    public IActionResult Delete(int id)
+    {
+        _roleService.Delete(id);
+        return RedirectToAction("Index", "Roles");
+    }
 }

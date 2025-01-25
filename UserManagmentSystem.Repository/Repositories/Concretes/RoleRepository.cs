@@ -26,11 +26,21 @@ public sealed class RoleRepository(BaseDbContext context) : IRoleRepository
 
     }
 
+    public int CountByRoleName(string roleName)
+    {
+        return context.Roles.Where(x => x.Name == roleName).Count();
+    }
+
     public Role Delete(Role role)
     {
         context.Roles.Remove(role);
         context.SaveChanges();
         return role;
+    }
+
+    public bool ExistsByRoleName(string roleName)
+    {
+        return context.Roles.Any(x=>x.Name==roleName);
     }
 
     public List<Role> GetAll()
@@ -48,7 +58,6 @@ public sealed class RoleRepository(BaseDbContext context) : IRoleRepository
         role.UpdatedDate = DateTime.UtcNow;
         context.Roles.Update(role);
         context.SaveChanges();
-
         return role;
     }
 }
