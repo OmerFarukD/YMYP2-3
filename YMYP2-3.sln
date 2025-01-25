@@ -5,7 +5,13 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Giris", "Giris\Giris.csproj", "{6269A2D9-F50E-4358-A6E6-BBA0D3D3A60F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagmentSystem", "UserManagmentSystem\UserManagmentSystem.csproj", "{E58C77E6-A762-4D74-8DC3-25BB6E4C0D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagmentSystem", "UserManagmentSystem\UserManagmentSystem.csproj", "{E58C77E6-A762-4D74-8DC3-25BB6E4C0D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagmentSystem.Models", "UserManagmentSystem.Models\UserManagmentSystem.Models.csproj", "{214D3FDB-B0D5-4859-97EB-204CE56C9EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagmentSystem.Repository", "UserManagmentSystem.Repository\UserManagmentSystem.Repository.csproj", "{78E0C66B-3F0F-44B8-B57A-5BF489C6464C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagmentSystem.Service", "UserManagmentSystem.Service\UserManagmentSystem.Service.csproj", "{7619B9FC-CF05-47F0-AD7A-DFE9242854B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{E58C77E6-A762-4D74-8DC3-25BB6E4C0D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E58C77E6-A762-4D74-8DC3-25BB6E4C0D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E58C77E6-A762-4D74-8DC3-25BB6E4C0D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{214D3FDB-B0D5-4859-97EB-204CE56C9EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{214D3FDB-B0D5-4859-97EB-204CE56C9EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{214D3FDB-B0D5-4859-97EB-204CE56C9EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{214D3FDB-B0D5-4859-97EB-204CE56C9EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E0C66B-3F0F-44B8-B57A-5BF489C6464C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E0C66B-3F0F-44B8-B57A-5BF489C6464C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E0C66B-3F0F-44B8-B57A-5BF489C6464C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E0C66B-3F0F-44B8-B57A-5BF489C6464C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7619B9FC-CF05-47F0-AD7A-DFE9242854B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7619B9FC-CF05-47F0-AD7A-DFE9242854B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7619B9FC-CF05-47F0-AD7A-DFE9242854B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7619B9FC-CF05-47F0-AD7A-DFE9242854B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

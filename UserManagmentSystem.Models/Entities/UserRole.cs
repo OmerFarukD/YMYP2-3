@@ -1,4 +1,4 @@
-﻿namespace UserManagmentSystem.Models.Entity;
+﻿namespace UserManagmentSystem.Models.Entities;
 
 public sealed class UserRole : Entity<long>
 {

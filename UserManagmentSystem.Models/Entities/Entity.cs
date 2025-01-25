@@ -1,10 +1,10 @@
-﻿namespace UserManagmentSystem.Models.Entity;
+﻿namespace UserManagmentSystem.Models.Entities;
 
 public abstract class Entity<TId>
 {
     protected Entity()
     {
-        
+
     }
 
     protected Entity(TId id)

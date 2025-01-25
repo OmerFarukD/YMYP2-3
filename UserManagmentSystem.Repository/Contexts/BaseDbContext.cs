@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UserManagmentSystem.Models.Entity;
+using UserManagmentSystem.Models.Entities;
 
 namespace UserManagmentSystem.Repository.Contexts;
 

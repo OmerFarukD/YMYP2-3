@@ -1,4 +1,4 @@
-﻿namespace UserManagmentSystem.Models.Entity;
+﻿namespace UserManagmentSystem.Models.Entities;
 
 public sealed class Role : Entity<int>
 {
@@ -18,7 +18,3 @@ public sealed class Role : Entity<int>
 
 
 }
-
-
-
-
