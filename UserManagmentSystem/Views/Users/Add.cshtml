@@ -1,27 +1,29 @@
-﻿@model UserAddRequestDto
+﻿@model UserAddViewModel
 
 <form asp-controller="Users" asp-action="Add" method="post">
     <div class="mb-3">
         <label asp-for="FirstName" class="form-label">FirstName</label>
         <input asp-for="FirstName" type="text" class="form-control">
-    
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     
     <div class="mb-3">
         <label asp-for="LastName" class="form-label">LastName</label>
         <input asp-for="LastName" type="text" class="form-control">
-        
+          <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     
     <div class="mb-3">
-            <label asp-for="City" class="form-label">Şehir</label>
-            <input asp-for="City" type="text" class="form-control">
-            
-        </div>
+        <label asp-for="City" class="form-label">Şehir</label>
+        <input asp-for="City" type="text" class="form-control">
+          <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    
     
     <div class="mb-3">
         <label asp-for="Username" class="form-label">Username</label>
         <input asp-for="Username" type="text" class="form-control">
+          <span asp-validation-for="Username" class="text-danger"></span>
         
     </div>
     
@@ -29,11 +31,13 @@
     <div class="mb-3">
         <label asp-for="Email" class="form-label">Email address</label>
         <input asp-for="Email" type="email" class="form-control">
+          <span asp-validation-for="Email" class="text-danger"></span>
 
     </div>
     <div class="mb-3">
         <label asp-for="Password"  class="form-label">Password</label>
         <input asp-for="Password" type="password" class="form-control">
+          <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-outline-success">Kaydet</button>
 </form>

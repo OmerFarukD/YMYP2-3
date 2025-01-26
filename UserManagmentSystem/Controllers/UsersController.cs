@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserManagmentSystem.Models;
 using UserManagmentSystem.Models.Dtos.Users;
-using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Service.Abstracts;
 using UserManagmentSystem.Service.Exceptions.Types;
 
@@ -17,6 +16,16 @@ public class UsersController(IUserService userService) : CustomBaseController
     }
 
 
+
+    // Parola minimum 6 haneli olacak 
+    // Parola içerisinde minimum 1 tane noktalama işareti olacak (.,!?)
+    // Parola içerisinde minimum 1 tane küçük harf olacak
+    // Parola içinde minimum 1 tane büyük harf olacak 
+    // Herhangi birine uymazsa false cevabı gelecek
+    // Hepsi uyarsa true dönecek.
+    // 1 tane rakam olmak zorunda
+  
+    
     [HttpGet]
     public IActionResult Add()
     {
@@ -24,10 +33,24 @@ public class UsersController(IUserService userService) : CustomBaseController
     }
 
     [HttpPost]
-    public IActionResult Add(UserAddRequestDto userAddRequestDto)
+    public IActionResult Add(UserAddViewModel addViewModel)
     {
         try
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            
+            
+            UserAddRequestDto userAddRequestDto = new(addViewModel.FirstName,
+                addViewModel.LastName,
+                addViewModel.Username,
+                addViewModel.Email,
+                addViewModel.Password,
+                addViewModel.City
+                ); 
+            
             userService.Add(userAddRequestDto);
         }
         catch (BusinessException e)
@@ -46,13 +69,26 @@ public class UsersController(IUserService userService) : CustomBaseController
     }
 
 
-    //[HttpGet]
-    //public IActionResult Detail(Guid id)
-    //{
-    //    var user = _context.Users.Find(id);
-    //    UserResponseDto userResponseDto = new(user.Id,user.FirstName, user.LastName, user.Username, user.Email, user.City, user.Status);
-    //    return View(userResponseDto);
-    //}
+    [HttpGet]
+    public IActionResult Detail(Guid id)
+    {
+        try
+        {
+            UserResponseDto? userResponseDto = userService.GetById(id);
+            return View(userResponseDto);
+        }
+        catch (NotFoundException e)
+        {
+            ExceptionViewModel viewModel = new()
+            {
+                Controller = "Users",
+                Action = "Index",
+                Exception = e
+            };
+            return NotFoundError(viewModel);
+        }
+
+    }
 
 
     //[HttpGet]
