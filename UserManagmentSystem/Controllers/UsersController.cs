@@ -1,65 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserManagmentSystem.Helpers;
+using UserManagmentSystem.Models;
 using UserManagmentSystem.Models.Dtos.Users;
 using UserManagmentSystem.Repository.Contexts;
+using UserManagmentSystem.Service.Abstracts;
+using UserManagmentSystem.Service.Exceptions.Types;
 
 namespace UserManagmentSystem.Controllers;
 
-public class UsersController : Controller
+public class UsersController(IUserService userService) : CustomBaseController
 {
-    //private readonly BaseDbContext _context;
-    //public UsersController()
-    //{
-    //    _context = new BaseDbContext();
-    //}
-
-    //[HttpGet]
-    //public IActionResult Index()
-    //{
-    //    var users = _context.Users.ToList();
-    //    List<UserResponseDto> responseDtos = new();
-
-    //    foreach (var item in users)
-    //    {
-    //        UserResponseDto userResponseDto = new UserResponseDto
-    //            (item.Id,item.FirstName, item.LastName, item.Username, item.Email, item.City, item.Status);
-
-    //        responseDtos.Add(userResponseDto);
-    //    }
-
-    //    return View(responseDtos);
-    //}
+    [HttpGet]
+    public IActionResult Index()
+    {
+        List<UserResponseDto> responseDtos = userService.GetAllUsers();
+        return View(responseDtos);
+    }
 
 
-    //[HttpGet]
-    //public IActionResult Add()
-    //{
-    //    return View();
-    //}
+    [HttpGet]
+    public IActionResult Add()
+    {
+        return View();
+    }
 
-    //[HttpPost]
-    //public IActionResult Add(UserAddRequestDto userAddRequestDto)
-    //{
-    //    HashingHelper.CreatePasswordHash(userAddRequestDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+    [HttpPost]
+    public IActionResult Add(UserAddRequestDto userAddRequestDto)
+    {
+        try
+        {
+            userService.Add(userAddRequestDto);
+        }
+        catch (BusinessException e)
+        {
+            ExceptionViewModel viewModel = new ExceptionViewModel()
+            {
+                Controller = "Users",
+                Action = "Add",
+                Exception = e
+            };
+            
+            return BusinessError(viewModel);
+        }
 
-    //    User user = new User()
-    //    {
-    //        City = userAddRequestDto.City,
-    //        CreatedDate = DateTime.UtcNow,
-    //        Email = userAddRequestDto.Email,
-    //        FirstName = userAddRequestDto.FirstName,
-    //        LastName = userAddRequestDto.LastName,
-    //        Username = userAddRequestDto.Username,
-    //        PasswordHash = passwordHash,
-    //        PasswordSalt = passwordSalt,
-    //        Status = true
-    //    };
-
-    //    _context.Users.Add(user);
-    //    _context.SaveChanges();
-
-    //    return RedirectToAction("Index","Users");
-    //}
+        return RedirectToAction("Index","Users");
+    }
 
 
     //[HttpGet]

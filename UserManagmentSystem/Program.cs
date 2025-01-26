@@ -12,19 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // AddTransient()
-// Her istek için nesne oluþturur , Kýsa ömürlü nesneler için kullanýlýr.
+// Her istek iï¿½in nesne oluï¿½turur , Kï¿½sa ï¿½mï¿½rlï¿½ nesneler iï¿½in kullanï¿½lï¿½r.
 
 
 // AddSingleton()
-//Uygulama boyunca tek bir nesne oluþturur. Global davranýþ gerektiren nesneler için uygundur.
+//Uygulama boyunca tek bir nesne oluï¿½turur. Global davranï¿½ï¿½ gerektiren nesneler iï¿½in uygundur.
 
 // AddScopped()
-// Her istek için(HTTP isteði olabilir.) tek bir nesne oluþturur. Web uygulamalarýnda çokca kullanýlýr.
+// Her istek iï¿½in(HTTP isteï¿½i olabilir.) tek bir nesne oluï¿½turur. Web uygulamalarï¿½nda ï¿½okca kullanï¿½lï¿½r.
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BaseDbContext>();
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleMapper,RoleAutoMapperConverter>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 

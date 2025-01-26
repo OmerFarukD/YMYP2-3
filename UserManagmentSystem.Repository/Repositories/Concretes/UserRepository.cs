@@ -29,6 +29,7 @@ public sealed class UserRepository(BaseDbContext context) : IUserRepository
     {
         return context.Users.ToList();
     }
+    
 
     public User? GetById(Guid id)
     {
@@ -42,5 +43,25 @@ public sealed class UserRepository(BaseDbContext context) : IUserRepository
         context.SaveChanges();
 
         return user;
+    }
+
+    public int CountUserByEmail(string email)
+    {
+        return context.Users.Count(u => u.Email == email);
+    }
+
+    public int CountUserByUsername(string username)
+    {
+        return context.Users.Count(u => u.Username == username);
+    }
+
+    public User? GetByUsername(string username)
+    {
+        return context.Users.SingleOrDefault(u=>u.Username == username);
+    }
+
+    public User? GetByEmail(string email)
+    {
+        return context.Users.SingleOrDefault(u=> u.Email ==email);
     }
 }

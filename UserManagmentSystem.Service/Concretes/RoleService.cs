@@ -70,6 +70,17 @@ public sealed class RoleService : IRoleService
 
     }
 
+    public Role GetByIdForUpdate(int id)
+    {
+        Role? role = _roleRepository.GetById(id);
+        if (role is null)
+        {
+            throw new NotFoundException("İlgili Rol bulunamadı.");
+        }
+
+        return role;
+    }
+
     public RoleResponseDto? GetById(int id)
     {
         Role? role = _roleRepository.GetById(id);

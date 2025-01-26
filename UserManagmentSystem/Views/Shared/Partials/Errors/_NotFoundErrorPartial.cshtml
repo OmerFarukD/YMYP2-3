@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model ExceptionViewModel
+<div class="alert alert-danger" style="width: 50%; " role="alert">
+    <h4 class="alert-heading">Hata !!!</h4>
+    <p> <strong>Hata Kodu :</strong>404 - Not Found</p>
+    <hr>
+    <p class="mb-0">@Model.Exception.Message</p>
+    <div>
+        <a asp-controller="@Model.Controller" asp-action="@Model.Action" style="text-decoration: none">Anasayfaya git</a>
+    </div>
+</div>

@@ -32,4 +32,8 @@
     <ProjectReference Include="..\UserManagmentSystem.Service\UserManagmentSystem.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
 </Project>

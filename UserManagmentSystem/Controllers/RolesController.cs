@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using UserManagmentSystem.Models;
 using UserManagmentSystem.Models.Dtos.Roles;
 using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Repository.Repositories.Concretes;
 using UserManagmentSystem.Service.Abstracts;
 using UserManagmentSystem.Service.Concretes;
+using UserManagmentSystem.Service.Exceptions.Types;
 
 namespace UserManagmentSystem.Controllers;
 
@@ -13,7 +15,7 @@ namespace UserManagmentSystem.Controllers;
 // Constructor Injection
 // Property Injection
 // Method Injection
-public class RolesController : Controller  
+public class RolesController : CustomBaseController  
 {
 
     // Constructor Arg Injection 
@@ -50,19 +52,23 @@ public class RolesController : Controller
     [HttpGet]
     public IActionResult Update(int id)
     {
+        var role = _roleService.GetByIdForUpdate(id);
 
+        RoleUpdateViewModel viewModel = new()
+        {
+            Id = role.Id,
+            Name = role.Name
+        };
 
-        var role = _roleService.GetById(id);
-
-
-        return View(role);
+        return View(viewModel);
     }
 
     [HttpPost]
-    public IActionResult Update(RoleUpdateRequestDto role)
+    public IActionResult Update(RoleUpdateViewModel viewModel)
     {
+        RoleUpdateRequestDto roleUpdateRequestDto = new RoleUpdateRequestDto(viewModel.Id, viewModel.Name);
 
-        _roleService.Update(role);
+        _roleService.Update(roleUpdateRequestDto);
         return RedirectToAction("Index", "Roles");
     }
 
@@ -71,9 +77,28 @@ public class RolesController : Controller
     public IActionResult Add(RoleAddRequestDto role)
     {
 
-        _roleService.Add(role);
-        return RedirectToAction("Index", "Roles");
+        try
+        {
+            _roleService.Add(role);
+            return RedirectToAction("Index", "Roles");
+        }
+        catch (BusinessException e)
+        {
+            ExceptionViewModel viewModel = new()
+            {
+                Exception = e,
+                Controller = "Roles",
+                Action = "Index"
+            };
+            
+            return BusinessError(viewModel);
+        }
+        
+   
     }
+
+    
+   
 
     [HttpGet]
     public IActionResult Add()
@@ -85,7 +110,20 @@ public class RolesController : Controller
     [HttpGet]
     public IActionResult Delete(int id)
     {
-        _roleService.Delete(id);
-        return RedirectToAction("Index", "Roles");
+        try
+        {
+            _roleService.Delete(id);
+            return RedirectToAction("Index", "Roles");
+        }
+        catch (NotFoundException e)
+        {
+            ExceptionViewModel vm = new()
+            {
+                Exception = e, Controller = "Roles", Action = "Index"
+            };
+            
+            return NotFoundError(vm);
+        }
+
     }
 }
