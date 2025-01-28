@@ -77,17 +77,7 @@ public sealed class UserService(IMapper mapper, IUserRepository userRepository) 
             throw new NotFoundException("Kullanıcı bulunamadı");
         }
 
-        UserDetailResponseDto dto = new UserDetailResponseDto(
-             user.Id,
-             user.FirstName,
-             user.LastName,
-             user.Username,
-             user.Email,
-             user.City,
-             user.Status,
-             user.UserRoles.Select(ur => ur.Role.Name).ToList()
-        );
-
+        UserDetailResponseDto dto = mapper.Map<UserDetailResponseDto>(user);
         return dto;
 
         // {1,"Admin"},{2,"User"}
@@ -97,24 +87,7 @@ public sealed class UserService(IMapper mapper, IUserRepository userRepository) 
     public List<UserDetailResponseDto> GetAllDetails()
     {
         List<User> users = userRepository.GetAllDetails();
-        List<UserDetailResponseDto> userDetailResponseDtos = new List<UserDetailResponseDto>();
-
-        foreach (var user in users)
-        {
-            UserDetailResponseDto dto = new UserDetailResponseDto(
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.Username,
-                user.Email,
-                user.City,
-                user.Status,
-                user.UserRoles.Select(ur => ur.Role.Name).ToList()
-            );
-            
-            userDetailResponseDtos.Add(dto);
-        }
-
+        List<UserDetailResponseDto> userDetailResponseDtos = mapper.Map<List<UserDetailResponseDto>>(users);
         return userDetailResponseDtos;
 
     }

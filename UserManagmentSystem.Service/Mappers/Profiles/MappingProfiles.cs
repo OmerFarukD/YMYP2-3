@@ -20,5 +20,11 @@ public class MappingProfiles : Profile
         CreateMap<UserRole, UserRoleResponseDto>().ReverseMap();
         CreateMap<UserRoleAddRequestDto, UserRole>().ReverseMap();
         CreateMap<UserRoleUpdateRequestDto, UserRole>().ReverseMap();
+
+        CreateMap<User, UserDetailResponseDto>()
+            .ForMember(x => x.Roles,
+                opt =>
+                    opt.MapFrom(x=>x.UserRoles.Select(r=>r.Role.Name))
+            );
     }
 }
