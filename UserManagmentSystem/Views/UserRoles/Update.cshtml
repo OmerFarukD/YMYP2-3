@@ -1,0 +1,21 @@
+﻿@model UserRoleUpdateViewModel
+
+<form asp-action="Update" asp-controller="UserRoles" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">Id</label>
+        <input asp-for="Id" type="number" class="form-control" readonly>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="UserId" class="form-label">User Id</label>
+        <input asp-for="UserId" type="text" class="form-control" >
+    </div>
+    
+       <div class="mb-3">
+            <label asp-for="RoleId" class="form-label">Rol Id</label>
+            <input asp-for="RoleId" type="number" class="form-control" >
+        </div>
+
+    <button type="submit" class="btn btn-outline-warning">Güncelle</button>
+</form>

@@ -1,0 +1,16 @@
+﻿@model AssignRoleViewModel
+
+<form asp-action="Add" asp-controller="UserRoles" method="post">
+    
+     <label asp-for="UserId"  class="form-label">Kullanıcı</label>
+    <select asp-items="Model.Users" asp-for="UserId" class="form-select">
+        <option selected disabled>Lütfen bir kullanıcı seçiniz</option>
+    </select>
+
+
+      <label asp-for="RoleId"  class="form-label">Kullanıcı</label>
+    <select asp-items="Model.Roles" asp-for="RoleId" class="form-select">
+        <option selected disabled>Lütfen bir Role seçiniz</option>
+    </select>
+    <button type="submit" class="btn btn-outline-success">Kaydet</button>
+</form>

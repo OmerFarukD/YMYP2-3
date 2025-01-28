@@ -7,7 +7,8 @@ public interface IUserService
 {
     void Add(UserAddRequestDto userAddRequestDto);
     void Login(LoginRequestDto loginRequestDto);
-    UserResponseDto? GetById(Guid id);
+    UserDetailResponseDto? GetById(Guid id);
+    List<UserDetailResponseDto> GetAllDetails();
     User GetByIdForUpdate(Guid id);
     List<UserResponseDto> GetAllUsers();
     void Delete(Guid id);

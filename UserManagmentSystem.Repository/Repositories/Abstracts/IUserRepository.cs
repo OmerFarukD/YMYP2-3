@@ -1,4 +1,5 @@
-﻿using UserManagmentSystem.Models.Entities;
+﻿using UserManagmentSystem.Models.Dtos.Users;
+using UserManagmentSystem.Models.Entities;
 
 namespace UserManagmentSystem.Repository.Repositories.Abstracts;
 
@@ -13,4 +14,11 @@ public interface IUserRepository : IRepository<User,Guid>
     User? GetByUsername(string username);
     User? GetByEmail(string email);
 
+    List<User> GetAllDetails();
+    List<UserDetailResponseDto> GetAllDetails1();
+    List<UserDetailResponseDto> GetAllDetails2();
+
+    User? GetDetailsById(Guid id);
+    UserDetailResponseDto? GetDetailsById1(Guid id);
+    UserDetailResponseDto? GetDetailsById2(Guid id);
 }

@@ -27,6 +27,8 @@ builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRoleService,UserRoleService>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IRoleMapper,RoleAutoMapperConverter>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 

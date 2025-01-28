@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using UserManagmentSystem.Models.Dtos.Roles;
+using UserManagmentSystem.Models.Dtos.UserRoles;
 using UserManagmentSystem.Models.Dtos.Users;
 using UserManagmentSystem.Models.Entities;
 
@@ -15,5 +16,9 @@ public class MappingProfiles : Profile
         CreateMap<RoleAddRequestDto, Role>();
         CreateMap<RoleUpdateRequestDto, Role>();
         CreateMap<User, UserResponseDto>();
+        
+        CreateMap<UserRole, UserRoleResponseDto>().ReverseMap();
+        CreateMap<UserRoleAddRequestDto, UserRole>().ReverseMap();
+        CreateMap<UserRoleUpdateRequestDto, UserRole>().ReverseMap();
     }
 }

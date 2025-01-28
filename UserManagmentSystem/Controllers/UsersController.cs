@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserManagmentSystem.Models;
 using UserManagmentSystem.Models.Dtos.Users;
+using UserManagmentSystem.Models.Entities;
 using UserManagmentSystem.Service.Abstracts;
 using UserManagmentSystem.Service.Exceptions.Types;
 
@@ -74,7 +75,7 @@ public class UsersController(IUserService userService) : CustomBaseController
     {
         try
         {
-            UserResponseDto? userResponseDto = userService.GetById(id);
+            UserDetailResponseDto? userResponseDto = userService.GetById(id);
             return View(userResponseDto);
         }
         catch (NotFoundException e)
@@ -91,28 +92,71 @@ public class UsersController(IUserService userService) : CustomBaseController
     }
 
 
-    //[HttpGet]
-    //public IActionResult Update(Guid id)
-    //{
-    //    var user = _context.Users.Find(id);
-    //    return View(user);
-    //}
+    [HttpGet]
+    public IActionResult Update(Guid id)
+    {
+        var user = userService.GetByIdForUpdate(id);
+        UserUpdateViewModel vm = new(user.Id,user.FirstName,user.LastName,user.Username,user.Email
+        ,user.City);
+        return View(vm);
+    }
 
 
-    //[HttpPost]
-    //public IActionResult Update(User user)
-    //{
-    //    _context.Users.Update(user);
-    //    _context.SaveChanges();
-    //    return RedirectToAction("Index","Users");
-    //}
+    [HttpPost]
+    public IActionResult Update(UserUpdateViewModel vm)
+    {
+        
+        // user service içerisinde update fonksiyonu yaz.
+        return RedirectToAction("Index","Users");
+    }
+    
+    
+    [HttpGet]
+    public IActionResult Delete(Guid id)
+    {
+        try
+        {
+            userService.Delete(id);
+            return RedirectToAction("Index", "Users");
+        }
+        catch (NotFoundException e)
+        {
+            return NotFoundError(new ExceptionViewModel(){Action = "Users",Controller="Index",Exception =e});
+        }
+    }
 
-    //[HttpGet]
-    //public IActionResult Delete(Guid id)
-    //{
-    //    var user = _context.Users.Find(id);
-    //    _context.Users.Remove(user);
-    //    _context.SaveChanges();
-    //    return RedirectToAction("Index", "Users");
-    //}
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Login(LoginViewModel viewModel)
+    {
+        try
+        {
+            LoginRequestDto dto = new LoginRequestDto(viewModel.Username, viewModel.Password);
+            userService.Login(dto);
+            return RedirectToAction("Index", "Users");
+        }
+        catch (Exception exception) {
+
+            if (exception is NotFoundException notFoundException)
+            {
+                return NotFoundError(new ExceptionViewModel()
+                    { Action = "Login", Controller = "Users", Exception = notFoundException });
+            }
+
+            if (exception is BusinessException businessException)
+            {
+                return BusinessError(new ExceptionViewModel()
+                    { Action = "Login", Controller = "Users", Exception = businessException });
+            }
+            
+            return GlobalError(new ExceptionViewModel()
+                { Action = "Login", Controller = "Users", Exception = exception });
+        }
+        
+    }
 }

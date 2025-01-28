@@ -1,11 +1,11 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-using UserManagmentSystem.Attributes.Validations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UserManagmentSystem.Models;
 
-public sealed record UserAddViewModel(
+public sealed record UserUpdateViewModel(
+    
+    Guid Id,
+    
     [Required(ErrorMessage = "Zorunlu alandır.")]
     [Display(Name = "Firstname")]
     string FirstName,
@@ -22,14 +22,6 @@ public sealed record UserAddViewModel(
     [Required(ErrorMessage = "Zorunlu alandır.")]
     [Display(Name = "Email")]
     string Email,
-    
-    // [RegularExpression(pattern:"(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])[A-Za-z!@#$%^&*(),.?\":{}|<>]{6,}",
-    //     ErrorMessage = "1 Büyük harf, 1 küçük harf, 6 haneli , 1 noktalama işareti olmak zorundadır."
-    //     )]
-    
-    
-    [PasswordRule(Min = 6)]
-    string Password,
     
     [Required(ErrorMessage = "Zorunlu alandır.")]
     [Display(Name = "Şehir")]

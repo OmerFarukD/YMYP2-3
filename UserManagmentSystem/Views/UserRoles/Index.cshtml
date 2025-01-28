@@ -1,0 +1,38 @@
+﻿@model List<UserRoleIndexDto>
+
+<a asp-action="Add" asp-controller="UserRoles" class="btn btn-outline-success">Ekle</a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Roller</th>
+        <th scope="col">Sil</th>
+        <th scope="col">Güncelle</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Username</td>
+            <td>@role.Email</td>
+            <td>
+                
+                <ul>
+                    @foreach (var item in role.Role)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </td>
+            <td><a class="btn btn-sm btn-danger" asp-action="Delete" asp-controller="UserRoles" asp-route-id="@role.Id">Sil</a></td>
+            <td><a class="btn btn-sm btn-warning" asp-action="Update" asp-controller="UserRoles" asp-route-id="@role.Id">Güncelle</a></td>
+        </tr>
+    }
+
+
+    </tbody>
+</table>

@@ -13,3 +13,13 @@ public sealed record UserAddRequestDto(
     string Password,
     string City
     );
+    
+    
+public  sealed record UserUpdateRequestDto(
+    Guid Id,
+    string FirstName,
+    string LastName,
+    string Username,
+    string Email,
+    string City
+);

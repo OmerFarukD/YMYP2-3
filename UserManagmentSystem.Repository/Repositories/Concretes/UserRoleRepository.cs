@@ -1,32 +1,48 @@
-﻿using UserManagmentSystem.Models.Entities;
+﻿using System.Runtime.InteropServices.JavaScript;
+using UserManagmentSystem.Models.Entities;
+using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Repository.Repositories.Abstracts;
 
 namespace UserManagmentSystem.Repository.Repositories.Concretes;
 
-public sealed class UserRoleRepository : IUserRoleRepository
+public sealed class UserRoleRepository(BaseDbContext context) : IUserRoleRepository
 {
     public UserRole Add(UserRole role)
     {
-        throw new NotImplementedException();
+        role.CreatedDate = DateTime.UtcNow;
+        context.UserRoles.Add(role);
+        context.SaveChanges();
+
+        return role;
     }
 
     public UserRole Delete(UserRole role)
     {
-        throw new NotImplementedException();
+        context.UserRoles.Remove(role);
+        context.SaveChanges();
+        return role;
     }
 
     public List<UserRole> GetAll()
     {
-        throw new NotImplementedException();
+        return context.UserRoles.ToList();
+    }
+
+    public bool ExistsUserRole(Guid userId, int roleId)
+    {
+        return context.UserRoles.Any(ur=> ur.RoleId==roleId && ur.UserId==userId);
     }
 
     public UserRole? GetById(long id)
     {
-        throw new NotImplementedException();
+        return context.UserRoles.Find(id);
     }
 
     public UserRole Update(UserRole role)
     {
-        throw new NotImplementedException();
+        role.UpdatedDate = DateTime.UtcNow;
+        context.UserRoles.Update(role);
+        context.SaveChanges();
+        return role;
     }
 }

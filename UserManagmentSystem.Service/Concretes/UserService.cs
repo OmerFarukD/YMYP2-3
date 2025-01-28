@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using UserManagmentSystem.Models.Dtos.Users;
 using UserManagmentSystem.Models.Entities;
 using UserManagmentSystem.Repository.Repositories.Abstracts;
@@ -68,17 +69,54 @@ public sealed class UserService(IMapper mapper, IUserRepository userRepository) 
         // Cookie ayarları 
     }
 
-    public UserResponseDto? GetById(Guid id)
+    public UserDetailResponseDto? GetById(Guid id)
     {
-        User? user = userRepository.GetById(id);
+        User? user = userRepository.GetDetailsById(id);
         if (user is null)
         {
             throw new NotFoundException("Kullanıcı bulunamadı");
         }
 
-        UserResponseDto responseDto = mapper.Map<UserResponseDto>(user);
+        UserDetailResponseDto dto = new UserDetailResponseDto(
+             user.Id,
+             user.FirstName,
+             user.LastName,
+             user.Username,
+             user.Email,
+             user.City,
+             user.Status,
+             user.UserRoles.Select(ur => ur.Role.Name).ToList()
+        );
 
-        return responseDto;
+        return dto;
+
+        // {1,"Admin"},{2,"User"}
+        // ["Admin","User"]
+    }
+
+    public List<UserDetailResponseDto> GetAllDetails()
+    {
+        List<User> users = userRepository.GetAllDetails();
+        List<UserDetailResponseDto> userDetailResponseDtos = new List<UserDetailResponseDto>();
+
+        foreach (var user in users)
+        {
+            UserDetailResponseDto dto = new UserDetailResponseDto(
+                user.Id,
+                user.FirstName,
+                user.LastName,
+                user.Username,
+                user.Email,
+                user.City,
+                user.Status,
+                user.UserRoles.Select(ur => ur.Role.Name).ToList()
+            );
+            
+            userDetailResponseDtos.Add(dto);
+        }
+
+        return userDetailResponseDtos;
+
     }
 
     public User GetByIdForUpdate(Guid id)

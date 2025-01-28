@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using Microsoft.EntityFrameworkCore;
+using UserManagmentSystem.Models.Dtos.Users;
 using UserManagmentSystem.Models.Entities;
 using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Repository.Repositories.Abstracts;
@@ -63,5 +65,64 @@ public sealed class UserRepository(BaseDbContext context) : IUserRepository
     public User? GetByEmail(string email)
     {
         return context.Users.SingleOrDefault(u=> u.Email ==email);
+    }
+
+    public List<User> GetAllDetails()
+    {
+        return context.Users
+            .Include(ur=> ur.UserRoles)
+            .ThenInclude(r=>r.Role)
+            .ToList();
+    }
+
+    public List<UserDetailResponseDto> GetAllDetails1()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<UserDetailResponseDto> GetAllDetails2()
+    {
+        throw new NotImplementedException();
+    }
+
+    public User? GetDetailsById(Guid id)
+    {
+        return context.Users
+            .Include(x=>x.UserRoles)
+            .ThenInclude(r=>r.Role)
+            .FirstOrDefault(x=>x.Id==id);
+    }
+
+    public UserDetailResponseDto? GetDetailsById1(Guid id)
+    {
+        // todo: Sonraki derste çözülecek
+        
+       // var detail = context.Users
+       //      .Where(x => x.Id == id)
+       //      .Select(user =>
+       //      {
+       //          new UserDetailResponseDto()
+       //          {
+       //              Id = user.Id,
+       //              FirstName = user.FirstName,
+       //              LastName = user.LastName,
+       //              Username = user.Username,
+       //              City = user.City,
+       //              Email = user.Email,
+       //              Status = user.Status,
+       //              Roles = (
+       //                  from userRole in context.UserRoles
+       //                  join role in context.Roles on userRole.RoleId equals role.Id
+       //                  where userRole.UserId == user.Id
+       //                  select role.Name).ToList()
+       //          };
+       //      });
+       
+       throw new NotImplementedException();
+    }
+
+    public UserDetailResponseDto? GetDetailsById2(Guid id)
+    {
+        throw new NotImplementedException();
     }
 }

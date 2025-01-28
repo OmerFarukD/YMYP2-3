@@ -15,6 +15,11 @@ public class CustomBaseController : Controller
     {
         return PartialView("Partials/Errors/_NotFoundErrorPartial",viewModel);
     }
-    
+
+
+    public IActionResult GlobalError(ExceptionViewModel viewModel)
+    {
+        return PartialView("Partials/Errors/_GlobalErrorPartial",viewModel);
+    }
     
 }
