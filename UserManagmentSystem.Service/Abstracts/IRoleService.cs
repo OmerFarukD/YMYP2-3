@@ -15,4 +15,7 @@ public interface IRoleService
     Role GetByIdForUpdate(int id);
 
     void Update(RoleUpdateRequestDto dto);
+
+    
+
 }

@@ -1,0 +1,29 @@
+﻿@model List<UserResponseDto>
+
+<table class="table table-info table-striped table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Status</th>
+        <th scope="col">İşlemler</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Username</td>
+            <td>@item.Email</td>
+            <td><input class="form-check-input" type="checkbox" @(item.Status ? "checked":"")  disabled></td>
+            <td><a asp-action="Detail" asp-controller="Users" asp-route-id="@item.Id">Detaya git</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

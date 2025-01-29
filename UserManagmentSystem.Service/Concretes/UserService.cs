@@ -50,7 +50,7 @@ public sealed class UserService(IMapper mapper, IUserRepository userRepository) 
     
     // todo: İlgili kullanıcı adı var mı 
     // todo: Parola Doğru mu 
-    public void Login(LoginRequestDto loginRequestDto)
+    public User Login(LoginRequestDto loginRequestDto)
     {
         User? user = userRepository.GetByUsername(loginRequestDto.Username);
         if (user is null)
@@ -65,8 +65,8 @@ public sealed class UserService(IMapper mapper, IUserRepository userRepository) 
         {
             throw new BusinessException("Parola veya email hatalıdır.");
         }
-        
-        // Cookie ayarları 
+
+        return user;
     }
 
     public UserDetailResponseDto? GetById(Guid id)

@@ -1,4 +1,7 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using UserManagmentSystem.Helpers;
+using UserManagmentSystem.Middlewares;
 using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Repository.Repositories.Abstracts;
 using UserManagmentSystem.Repository.Repositories.Concretes;
@@ -30,7 +33,21 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserRoleService,UserRoleService>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IRoleMapper,RoleAutoMapperConverter>();
+builder.Services.AddSingleton<AuthenticationHelper>();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/LogOut";
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    });
 
 
 var app = builder.Build();
@@ -47,8 +64,21 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
+// 1. Yöntem 
+//app.UseMiddleware<LoginMiddleware>();
+
+app.Use(async (context, next) =>
+{
+    if (!context.User.Identity.IsAuthenticated && !context.Request.Path.StartsWithSegments("/Account"))
+    {
+        context.Response.Redirect("/Account/Login");
+        return;
+    }
+    await next(context);
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
+using Microsoft.EntityFrameworkCore;
 using UserManagmentSystem.Models.Entities;
 using UserManagmentSystem.Repository.Contexts;
 using UserManagmentSystem.Repository.Repositories.Abstracts;
@@ -31,6 +32,16 @@ public sealed class UserRoleRepository(BaseDbContext context) : IUserRoleReposit
     public bool ExistsUserRole(Guid userId, int roleId)
     {
         return context.UserRoles.Any(ur=> ur.RoleId==roleId && ur.UserId==userId);
+    }
+
+    public List<string> GetAllRolesByUserId(Guid userId)
+    {
+        // Select Name from Roles where UserId = userId
+        return context.UserRoles
+            .Where(ur => ur.UserId == userId)
+            .Include(x=>x.Role)
+            .Select(x => x.Role.Name)
+            .ToList();
     }
 
     public UserRole? GetById(long id)

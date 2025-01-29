@@ -14,4 +14,6 @@ public interface IUserRoleService
 
     List<UserRoleIndexDto> GetRolesAndUsers();
     void Delete(long id);
+    
+    List<string> GetAllByUserId(Guid id);
 }

@@ -12,7 +12,15 @@
                     <a class="nav-link text-white" asp-area="" asp-controller="UserRoles" asp-action="Index">Kullanıcı Rolleri</a>
                 </li>
                 
+                @if (AuthenticationHelper.IsAuthenticated())
+                {
+                                
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="LogOut">Çıkış yap</a>
+                    </li>
+                }
             </ul>
+            <span class="navbar-text text-white">@AuthenticationHelper.GetUserName()</span>
         </div>
     </div>
 </nav>

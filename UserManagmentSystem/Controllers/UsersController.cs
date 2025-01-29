@@ -125,12 +125,6 @@ public class UsersController(IUserService userService) : CustomBaseController
         }
     }
 
-    [HttpGet]
-    public IActionResult Login()
-    {
-        return View();
-    }
-
     [HttpPost]
     public IActionResult Login(LoginViewModel viewModel)
     {

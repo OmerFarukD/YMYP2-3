@@ -1,32 +1,13 @@
-﻿
-@model List<UserResponseDto>
+﻿@model List<UserResponseDto>
 
-<a asp-controller="Users" asp-action="Add" class="btn btn-outline-success mb-2">Ekle</a>
+<role-content filter-role="@RoleHelper.Admin" roles="AuthenticationHelper.GetUserRoles()">
+    <a asp-controller="Users" asp-action="Add" class="btn btn-outline-success mb-2">Ekle</a>
+</role-content>
 
-<table class="table table-info table-striped table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Firstname</th>
-            <th scope="col">Lastname</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Status</th>
-            <th scope="col">İşlemler</th>
+@* @await Component.InvokeAsync("UsersTable",new{users=Model}) *@
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@* <vc:users-table users="Model"></vc:users-table> *@
+<partial name="Partials/Users/_UsersTablePartial" model="Model"/>
 
-            <tr>
-                <td>@item.FirstName</td>
-                <td>@item.LastName</td>
-                <td>@item.Username</td>
-                <td>@item.Email</td>
-                <td><input class="form-check-input" type="checkbox" @(item.Status ? "checked":"")  disabled></td>
-                <td><a asp-action="Detail" asp-controller="Users" asp-route-id="@item.Id">Detaya git</a></td>
-            </tr>
-        }
-    </tbody>
-</table>
+@* @Html.Partial("Partials/Users/_UsersTablePartial",model:Model) *@
+

@@ -17,7 +17,6 @@ namespace UserManagmentSystem.Controllers;
 // Method Injection
 public class RolesController : CustomBaseController  
 {
-
     // Constructor Arg Injection 
     private readonly IRoleService _roleService;
 
@@ -42,9 +41,7 @@ public class RolesController : CustomBaseController
 
     public IActionResult Index()
     {
-
-        var responseDtos = _roleService.GetAll();
-        return View(responseDtos);
+        return View();
 
     }
 

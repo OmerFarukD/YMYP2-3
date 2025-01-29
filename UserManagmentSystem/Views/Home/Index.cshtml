@@ -5,5 +5,9 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p> Doğru mu : @ViewBag.esitMi</p>
+    
+    @* <p>Hoşgeldiniz : @AuthenticationHelper.GetUserName()</p> *@
+    
+    <user-name name="@AuthenticationHelper.GetUserName()"></user-name>
+    <bold-text> Doğru mu : @ViewBag.esitMi</bold-text>
 </div>

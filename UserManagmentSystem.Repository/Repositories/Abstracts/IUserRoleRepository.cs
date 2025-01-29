@@ -6,4 +6,6 @@ namespace UserManagmentSystem.Repository.Repositories.Abstracts;
 public interface IUserRoleRepository : IRepository<UserRole,long>
 {
     bool ExistsUserRole(Guid userId, int roleId);
+
+    List<string> GetAllRolesByUserId(Guid userId);
 }

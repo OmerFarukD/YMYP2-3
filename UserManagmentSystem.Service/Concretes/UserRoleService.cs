@@ -93,4 +93,9 @@ public sealed class UserRoleService(IUserRoleRepository userRoleRepository,
         }
         userRoleRepository.Delete(userRole);
     }
+
+    public List<string> GetAllByUserId(Guid id)
+    {
+        return userRoleRepository.GetAllRolesByUserId(id);
+    }
 }

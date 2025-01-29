@@ -1,7 +1,10 @@
-﻿@model List<UserRoleIndexDto>
+﻿
+@model List<UserRoleIndexDto>
 
-<a asp-action="Add" asp-controller="UserRoles" class="btn btn-outline-success">Ekle</a>
-
+@if (AuthenticationHelper.IsRoleContains(RoleHelper.Admin))
+{
+    <a asp-action="Add" asp-controller="UserRoles" class="btn btn-outline-success">Ekle</a>
+}
 <table class="table">
     <thead>
     <tr>
